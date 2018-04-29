@@ -1,0 +1,313 @@
+{
+    "version": 1,
+    "supportedProjectTypes": [ "GenericProjectManager.GenericProject" ],
+    "id": "A.Arduino_SKETCH",
+    "category": "P.Projects",
+    "trDescription": "Creates an Arduino project based on the makefile from the arduino-mk package.",
+    "trDisplayName": "Arduino Project using sketch",
+    "trDisplayCategory": "AVR",
+    "icon": "arduino_logo.jpg",
+    "options":
+    [
+        { "key": "ProFileName", "value": "%{JS: Util.fileName('%{ProjectDirectory}/%{ProjectName}', 'creator')}" },
+	{ "key": "ProBaseName", "value": "%{JS: Util.fileName('%{ProjectDirectory}/%{ProjectName}')}" },
+        { "key": "IsTopLevelProject", "value": "%{JS: !'%{Exists:ProjectExplorer.Profile.Ids}'}" },
+        { "key": "BOARD_TAG", "value": "%{board_tag}" },
+	{ "key": "BOARD_MCU", "value": "%{board_mcu}" },
+	{ "key": "BOARD_F", "value": "%{board_f}" },
+	{ "key": "ARDUINO_LIBS", "value": "%{arduino_libs}" },
+	{ "key": "ARDUINO_LIBS_ROOT_PATH", "value": "%{arduino_libs_root_path}" },
+        { "key": "ARDUINO_DIR", "value": "%{arduino_dir}" },
+        { "key": "ARDUINO_MAKEFILE_DIR", "value": "%{arduino_makefile_dir}" },
+        { "key": "AVR_TOOLS_DIR", "value": "%{avr_tools_dir}" },
+        { "key": "ARDUINO_PORT", "value": "%{arduino_port}" },
+        { "key": "ARDUINO_PORT_SPEED", "value": "%{arduino_port_speed}" },
+        { "key": "SERIAL_MONITOR_PROGRAM", "value": "%{serial_monitor_program}" },
+        { "key": "SERIAL_MONITOR_PROGRAM_ARG_PORT", "value": "%{serial_monitor_program_arg_port}" },
+        { "key": "SERIAL_MONITOR_PROGRAM_ARG_SPEED", "value": "%{serial_monitor_program_arg_speed}" },
+        { "key": "KitId", "value": "%{kit_id}" },
+        { "key": "DEFAULT_BOARD_F", "value": "16000000" },
+        { "key": "DEFAULT_ARDUINO_LIBS", "value": "" },
+        { "key": "DEFAULT_ARDUINO_LIBS_ROOT_PATH", "value": "/usr/share/arduino/hardware/archlinux-arduino/avr"},
+        { "key": "DEFAULT_ARDUINO_DIR", "value": "/usr/share/arduino" },
+        { "key": "DEFAULT_ARDUINO_MAKEFILE_DIR", "value": "/usr/share/arduino/Arduino-Makefile" },
+        { "key": "DEFAULT_AVR_TOOLS_DIR", "value": "" },
+        { "key": "DEFAULT_ARDUINO_PORT", "value": "/dev/ttyACM0" },   
+        { "key": "DEFAULT_ARDUINO_PORT_SPEED", "value": "115200" },
+        { "key": "DEFAULT_SERIAL_MONITOR_PROGRAM", "value": "/usr/bin/gtkterm" },
+        { "key": "DEFAULT_SERIAL_MONITOR_PROGRAM_ARG_PORT", "value": "--port" },
+        { "key": "DEFAULT_SERIAL_MONITOR_PROGRAM_ARG_SPEED", "value": "--speed" }
+    ],
+    "pages":
+    [
+        {
+            "trDisplayName": "Project Location",
+            "trShortTitle": "Location",
+            "typeId": "Project",
+	    "data": { "trDescription": "This wizard creates an Arduino Makefile based project" } 
+        },
+	{
+		"trDisplayName": "Define sketch",
+		"trShortTitle": "Details",
+		"typeId": "Fields",
+		"data":
+		[
+			{
+				"name" : "board_tag",
+				"trDisplayName": "Board tag",
+				"type": "ComboBox", 
+				"mandatory": true,
+				"data":
+				{
+					"items":
+					[
+                        {"trKey": "Arduino Uno", "value": "uno" },
+			{"trKey": "Arduino NG or older", "value": "atmegang" }, 
+			{"trKey": "Arduino BT", "value": "bt" }, 
+			{"trKey": "Arduino Duemilanove or Diecimila", "value": "diecimila" }, 
+			{"trKey": "Arduino Esplora", "value": "esplora" }, 
+			{"trKey": "Arduino Ethernet", "value": "ethernet" }, 
+			{"trKey": "Arduino Fio", "value": "fio" }, 
+			{"trKey": "Arduino Leonardo", "value": "leonardo" }, 
+			{"trKey": "LilyPad Arduino", "value": "lilypad" }, 
+			{"trKey": "LilyPad Arduino USB", "value": "LilyPadUSB" }, 
+			{"trKey": "Arduino Mega ADK", "value": "megaADK" }, 
+			{"trKey": "Arduino Mega or Mega 2560", "value": "mega" }, 
+			{"trKey": "Arduino Micro", "value": "micro" }, 
+			{"trKey": "Arduino Mini", "value": "mini" }, 
+			{"trKey": "Arduino Nano", "value": "nano" }, 
+			{"trKey": "Arduino Pro or Pro Mini", "value": "pro" }, 
+			{"trKey": "Arduino Robot Control", "value": "robotControl" }, 
+			{"trKey": "Arduino Robot Motor", "value": "robotMotor" },  
+			{"trKey": "Arduino Yun", "value": "yun" }
+					]
+				}
+			},
+			{
+				"name" : "board_mcu",
+				"trDisplayName": "Board",
+				"type": "ComboBox", 
+				"mandatory": true,
+				"data":
+				{
+					"items":
+					[
+                                {"trKey": "(just pro) 16MHz atmega328", "value": "16MHzatmega328" },
+				{"trKey": "(just pro) 8MHz atmega328", "value": "8MHzatmega328" },
+				{"trKey": "atmega328p", "value": "atmega328p" },
+				{"trKey": "atmega1280", "value": "atmega1280" },
+				{"trKey": "(just pro) 16MHz atmega168", "value": "16MHzatmega168" },
+				{"trKey": "(just pro)  8MHz atmega168", "value": "8MHzatmega168" },
+				{"trKey": "atmega168", "value": "atmega168" },
+				{"trKey": "atmega2560", "value": "atmega2560" },			
+				{"trKey": "atmega32u4", "value": "atmega32u4" },
+				{"trKey": "atmega8", "value": "atmega8" },
+				{"trKey": "atmegang", "value": "atmegang" }
+					]
+				}
+			},
+                        {
+                                "name": "board_f",
+                                "trDisplayName": "Frequency:",
+                                "mandatory": true,
+                                "type": "LineEdit",
+                                "data":{"trText": "%{DEFAULT_BOARD_F}"}
+                        },
+                        {
+                                "name": "arduino_libs",
+                                "trDisplayName": "Libraries:",
+                                "trToolTip": "A list of any libraries used by the sketch (we assume these are in $(ARDUINO_DIR)/hardware/libraries or your sketchbook's libraries directory)",
+                                "type": "LineEdit",
+                                "mandatory": false,
+                                "data":{
+                                    "validator": "^[^\"]+$",
+                                    "trPlaceholder": "SD SD/utility Wire Wire/utility",
+                                    "trText": "%{DEFAULT_ARDUINO_LIBS}"
+                                }
+                        },
+                        {
+                                "name": "arduino_dir",
+                                "trDisplayName": "Arduino path:",
+                                "mandatory": true,
+                                "type": "PathChooser",
+                                "data":{
+                                    "kind": "existingDirectory",
+                                    "basePath": "%{InitialPath}",
+                                    "path": "%{DEFAULT_ARDUINO_DIR}"
+                                }
+                        },
+                        {
+                                "name": "arduino_makefile_dir",
+                                "trDisplayName": "Makefile path:",
+                                "mandatory": true,
+                                "type": "PathChooser",
+                                "data":{
+                                    "kind": "existingDirectory",
+                                    "basePath": "%{InitialPath}",
+                                    "path": "%{DEFAULT_ARDUINO_MAKEFILE_DIR}"
+                                }
+                        },                        
+                        {
+                                "name": "avr_tools_dir",
+                                "trDisplayName": "AVR tools path:",
+                                "trToolTip": "Leave empty to let Arduino.mk detect the path",
+                                "type": "PathChooser",
+                                "mandatory": false,
+                                "data":{
+                                    "kind": "existingDirectory",
+                                    "basePath": "%{InitialPath}",
+                                    "path": "%{DEFAULT_AVR_TOOLS_DIR}"
+                                }
+                        },
+                        {
+                                "name": "arduino_libs_root_path",
+                                "trDisplayName": "Arduino libraries root path:",
+                                "trToolTip": "This is where qtcreator's project will look for the arduino libraries",
+                                "type": "PathChooser",
+                                "mandatory": false,
+                                "data":{
+                                    "kind": "existingDirectory",
+                                    "basePath": "%{InitialPath}",
+                                    "path": "%{DEFAULT_ARDUINO_LIBS_ROOT_PATH}"
+                                }
+                        },                        
+                        {
+                                "name": "arduino_port",
+                                "trDisplayName": "Serial port:",
+                                "mandatory": true,
+                                "type": "LineEdit",
+                                "data":{
+                                    "validator": "^[^\"]+$",
+                                    "trText": "%{DEFAULT_ARDUINO_PORT}"
+                                }
+                        },
+                        {
+                                "name": "arduino_port_speed",
+                                "trDisplayName": "Serial port baudrate:",
+                                "mandatory": true,
+                                "type": "LineEdit",
+                                "data":{
+                                    "validator": "^[^\"]+$",
+                                    "trText": "%{DEFAULT_ARDUINO_PORT_SPEED}"
+                                }
+                        },       
+                        {
+                                "name": "serial_monitor_program",
+                                "trDisplayName": "Serial monitor program:",
+                                "mandatory": true,
+                                "type": "LineEdit",
+                                "data":{
+                                    "validator": "^[^\"]+$",
+                                    "trText": "%{DEFAULT_SERIAL_MONITOR_PROGRAM}"
+                                }
+                        },       
+                        {
+                                "name": "serial_monitor_program_arg_port",
+                                "trDisplayName": "Serial monitor program port argument:",
+                                "mandatory": true,
+                                "type": "LineEdit",
+                                "data":{
+                                    "validator": "^[^\"]+$",
+                                    "trText": "%{DEFAULT_SERIAL_MONITOR_PROGRAM_ARG_PORT}"
+                                }
+                        },       
+                        {
+                                "name": "serial_monitor_program_arg_speed",
+                                "trDisplayName": "Serial monitor program baudrate argument:",
+                                "mandatory": true,
+                                "type": "LineEdit",
+                                "data":{
+                                    "validator": "^[^\"]+$",
+                                    "trText": "%{DEFAULT_SERIAL_MONITOR_PROGRAM_ARG_SPEED}"
+                                }
+                        },
+                        {
+                                "name": "kit_id",
+                                "trDisplayName": "ADVANCED - kit identifier from ~/.config/QtProject/qtcreator/profiles.xml:",
+                                "mandatory": false,
+                                "trToolTip": "If you are an advanced user and want to use the predefined run and build settings in %{ProFileName}.creator.shared you must get the kit id from ~/.config/QtProject/qtcreator/profiles.xml add it here.",
+                                "type": "LineEdit",
+                                "data":{
+                                    "validator": "^[^\"]+$",
+                                    "trText": ""
+                                }
+                        }                        
+			]
+	},
+        {
+            "trDisplayName": "Build notes",
+            "trShortTitle": "Notes",
+            "typeId": "Fields",
+            "data":
+            [
+                {
+                    "name": "LabelNotes",
+                    "type": "Label",
+                    "span": true,
+                    "visible": true,
+                    "data":
+                    {
+                        "wordWrap": true,
+                        "trText": "Once project is created you must configure the project build in Projects > Build & Run > Run. To add upload you could create a Run configuration specifying \"Executable: make\" and \"Command line arguments: upload\". To add monitor you could create a Run configuration specifying \"Executable: make\" and \"Command line arguments: monitor\".\nIf you are an advanced user and want to use the predefined settings in %{ProFileName}.creator.shared you must get the kit id from ~/.config/QtProject/qtcreator/profiles.xml add it in previous page."
+                    }
+                }            
+            ]
+        },
+        
+        {
+    "trDisplayName": "Project Management",
+    "trShortTitle": "Summary",
+    "typeId": "Summary"
+}
+   
+    ],
+	"generators":
+	[
+		{
+			"typeId": "File",
+			"data":
+			[
+
+				{
+					"source": "project.creator",
+					"target": "%{ProFileName}",
+					"openAsProject": true
+				},
+				{
+					"source": "project.creator.shared",
+					"target": "%{JS: Util.fileName('%{ProjectDirectory}/%{ProjectName}', 'creator.shared')}"
+				},
+				{
+					"source": "project.config",
+					"target": "%{JS: Util.fileName('%{ProjectDirectory}/%{ProjectName}', 'config')}"
+				},
+				{
+					"source": "project.files",
+					"target": "%{JS: Util.fileName('%{ProjectDirectory}/%{ProjectName}', 'files')}"
+				},
+				{
+					"source": "project.includes",
+					"target": "%{JS: Util.fileName('%{ProjectDirectory}/%{ProjectName}', 'includes')}"
+				},
+				{
+					"source": "project.ino",
+					"target": "%{JS: Util.fileName('%{ProjectDirectory}/%{ProjectName}', 'ino')}",
+					"openInEditor": true
+                                },
+				{
+					"source": "Makefile",
+					"target": "%{JS: Util.fileName('%{ProjectDirectory}/Makefile', '')}"
+				},
+                                {
+                                        "source": "main.cpp",
+                                        "target": "%{JS: Util.fileName('%{ProjectDirectory}/main', 'cpp')}"
+                                },
+                                {
+                                    "source": "git.ignore",
+                                    "target": ".gitignore",
+                                    "condition": "%{JS: ! %{IsSubproject} && '%{VersionControl}' === 'G.Git'}"
+                }                                
+			]
+		}
+	]    
+}
