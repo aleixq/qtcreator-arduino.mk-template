@@ -62,6 +62,8 @@ INSTALLATION INSTRUCTIONS
 File > New File or Project
 Select AVR > Arduino project using sketch.
 
+Notes: I'm using archlinux so maybe some default paths are wrong, look for yours. 
+
 ## Based on work of: 
 * Cleiton Souza (cleiton@tutamail.com)
 * Jason Jorgenson (jjorgenson@gmail.com)
