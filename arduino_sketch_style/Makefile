@@ -14,8 +14,8 @@ BOARD_SUB	= %{BOARD_MCU}
 MONITOR_PORT = %{ARDUINO_PORT}
 
 # Avrdude code for programming
-AVRDUDE		= $(ARDUINO_DIR)/hardware/tools/avr/bin/avrdude
-AVRDUDE_CONF	= $(ARDUINO_DIR)/hardware/tools/avr/etc/avrdude.conf
+#AVRDUDE		= $(ARDUINO_DIR)/hardware/tools/avr/bin/avrdude
+#AVRDUDE_CONF	= $(ARDUINO_DIR)/hardware/tools/avr/etc/avrdude.conf
 #AVRDUDE_ARD_PROGRAMMER	= wiring
 #AVRDUDE_ARD_BAUDRATE	= 115200
 
