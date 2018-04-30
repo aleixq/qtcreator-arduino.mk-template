@@ -26,6 +26,10 @@ In this repository you will find these templates in folders:
 * arduino_sketch_style
   + This folder contains a Sketch style Arduino template
   + (the same style used in the official Arduino IDE)
+  + It also has a default configuration that will fill the *Build* step named `make` in run configuration as `make upload`,
+  + will fill another *Build* step named `make monitor` in run configuration as `make monitor`(gnu screen is required),
+  + and will fill the *Run* > run configuration to run the Serial monitor software defined in wizard.
+  + To allow providing the default settings by wizard, the kit id must be defined in wizard, it's in `~/.config/QtProject/qtcreator/profiles.xml` (sorry, no automatic discover is possible).
 
 
 INSTALLATION INSTRUCTIONS
